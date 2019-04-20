@@ -1,9 +1,9 @@
 package br.com.romulo.conceito.domain;
 
 public enum TipoCliente {
-PESSOA_FISICA(1,"PESSOA FÍSICA"),
-PESSOA_JURIDICA(2," PESSOA JURIDICA")
-;
+	PESSOA_FISICA(1,"PESSOA FÍSICA"),
+	PESSOA_JURIDICA(2," PESSOA JURIDICA")
+	;
 	
 	private Integer codigo;
 	private String descricao;

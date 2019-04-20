@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -26,6 +27,13 @@ public class Pedido implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="id_endereco")
 	private Endereco endereco;
+	
+	@ManyToOne
+	@JoinColumn(name="id_cliente")
+	private Cliente cliente;
+	
+	@OneToOne
+	private Pagamento pagamento;
 
 	public Integer getId() {
 		return id;

@@ -35,6 +35,11 @@ public class Cliente implements Serializable{
 	@CollectionTable(name="TELEFONES")
 	private Set<String> telefones;
 	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos;
+	
+	
+	
 	public Cliente() {
 	}
 	
