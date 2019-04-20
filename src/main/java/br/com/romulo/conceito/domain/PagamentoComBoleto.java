@@ -16,6 +16,16 @@ public class PagamentoComBoleto extends Pagamento {
 	@Temporal(TemporalType.DATE)
 	private Calendar dataVencimento;
 
+	public PagamentoComBoleto() {}
+	
+	public PagamentoComBoleto(Integer id, Integer estado, Pedido pedido,Calendar dataPagamento, Calendar dataVencimento) {
+		super(id, estado, pedido);
+		this.dataPagamento = dataPagamento;
+		this.dataVencimento = dataVencimento;
+	}
+
+
+
 	public Calendar getDataPagamento() {
 		return dataPagamento;
 	}

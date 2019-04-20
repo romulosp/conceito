@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -23,6 +24,21 @@ public abstract class Pagamento implements Serializable{
 	private Integer id;
 	
 	private Integer estado;
+	
+	@OneToOne
+	private Pedido pedido;
+
+	public Pagamento() {}
+	
+	public Pagamento(Integer id, Integer estado, Pedido pedido) {
+		super();
+		this.id = id;
+		this.estado = estado;
+		this.pedido = pedido;
+	}
+
+
+
 
 	public Integer getId() {
 		return id;

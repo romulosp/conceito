@@ -2,6 +2,7 @@ package br.com.romulo.conceito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,13 +17,23 @@ import br.com.romulo.conceito.domain.Cidade;
 import br.com.romulo.conceito.domain.Cliente;
 import br.com.romulo.conceito.domain.Endereco;
 import br.com.romulo.conceito.domain.Estado;
+import br.com.romulo.conceito.domain.EstadoPagamento;
+import br.com.romulo.conceito.domain.ItemPedido;
+import br.com.romulo.conceito.domain.PagamentoComBoleto;
+import br.com.romulo.conceito.domain.PagamentoComCartao;
+import br.com.romulo.conceito.domain.Pedido;
 import br.com.romulo.conceito.domain.Produto;
+import br.com.romulo.conceito.domain.ProdutoPedidoPK;
 import br.com.romulo.conceito.domain.TipoCliente;
 import br.com.romulo.conceito.repositories.CategoriaRepository;
 import br.com.romulo.conceito.repositories.CidadeRepository;
 import br.com.romulo.conceito.repositories.ClienteRepository;
 import br.com.romulo.conceito.repositories.EnderecoRepository;
 import br.com.romulo.conceito.repositories.EstadoRepository;
+import br.com.romulo.conceito.repositories.ItemPedidoRepository;
+import br.com.romulo.conceito.repositories.PagamentoComBoletoRepository;
+import br.com.romulo.conceito.repositories.PagamentoComCartaoRepository;
+import br.com.romulo.conceito.repositories.PedidoRepository;
 import br.com.romulo.conceito.repositories.ProdutoRepository;
 
 @SpringBootApplication
@@ -45,6 +56,18 @@ public class ConceitoApplication implements CommandLineRunner{
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	
+	@Autowired
+	private PedidoRepository pedidoRepository;
+	
+	@Autowired
+	private PagamentoComCartaoRepository pagamentoComCartaoRepository;
+	
+	@Autowired
+	private PagamentoComBoletoRepository pagamentoComBoletoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 //	@Autowired
 //	private PedidoRepository pedidoRepository;
@@ -122,6 +145,38 @@ public class ConceitoApplication implements CommandLineRunner{
 		clienteRepository.saveAll(Arrays.asList(cliente1 ));
 		
 		enderecoRepository.saveAll(Arrays.asList(endereco1,endereco2));
+		
+		
+		Pedido pedido1 =  new Pedido(Calendar.getInstance(),endereco1,cliente1);
+		
+		PagamentoComCartao pagamentoComCartao = new PagamentoComCartao(null, EstadoPagamento.QUITADO.getCodigo(), pedido1, 6);
+				pagamentoComCartao.setEstado(EstadoPagamento.QUITADO);
+		
+		pedido1.setPagamento(pagamentoComCartao);
+		
+		Pedido pedido2 =  new Pedido(Calendar.getInstance(),endereco2,cliente1);
+
+		PagamentoComBoleto pagamentoComBoleto = new PagamentoComBoleto(null,EstadoPagamento.PENDENTE.getCodigo(),pedido2,Calendar.getInstance(),null);
+		
+		pedido2.setPagamento(pagamentoComBoleto);
+		
+		pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
+	
+		pagamentoComCartaoRepository.saveAll(Arrays.asList(pagamentoComCartao));
+		
+		pagamentoComBoletoRepository.saveAll(Arrays.asList(pagamentoComBoleto));
+		
+		ProdutoPedidoPK produtoID1 = new ProdutoPedidoPK(produto1, pedido1);
+		ProdutoPedidoPK produtoID2 = new ProdutoPedidoPK(produto3, pedido1);
+		ProdutoPedidoPK produtoID3 = new ProdutoPedidoPK(produto2, pedido2);
+		
+		
+		ItemPedido itemPedido1 = new  ItemPedido(produtoID1, null, 1, 200.00);
+		ItemPedido itemPedido2 = new  ItemPedido(produtoID2, null, 2, 80.00);
+		ItemPedido itemPedido3 = new  ItemPedido(produtoID3, 100.00, 1, 800.00);
+		
+		
+		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1,itemPedido2,itemPedido3));
 	}
 }
 

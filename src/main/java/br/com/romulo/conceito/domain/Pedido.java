@@ -3,6 +3,7 @@ package br.com.romulo.conceito.domain;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,8 +33,26 @@ public class Pedido implements Serializable{
 	@JoinColumn(name="id_cliente")
 	private Cliente cliente;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Pagamento pagamento;
+	
+	public Pedido() {}
+	
+	
+	public Pedido(Calendar instante, Endereco endereco, Cliente cliente, Pagamento pagamento) {
+		super();
+		this.instante = instante;
+		this.endereco = endereco;
+		this.cliente = cliente;
+		this.pagamento = pagamento;
+	}
+
+	public Pedido(Calendar instante, Endereco endereco, Cliente cliente) {
+		super();
+		this.instante = instante;
+		this.endereco = endereco;
+		this.cliente = cliente;
+	}
 
 	public Integer getId() {
 		return id;
@@ -74,5 +93,35 @@ public class Pedido implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
 	}
 }
