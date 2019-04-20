@@ -1,11 +1,13 @@
 package br.com.romulo.conceito.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 public class Categoria implements Serializable{
@@ -21,11 +23,17 @@ public class Categoria implements Serializable{
 	public Categoria() {
 		
 	}
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id ;
 	private String nome;
 	
+	@ManyToMany(mappedBy="categorias")
+	private List<Produto> produto;
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -38,8 +46,16 @@ public class Categoria implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	 
 	
-	
+	public List<Produto> getProduto() {
+		return produto;
+	}
+
+	public void setProduto(List<Produto> produto) {
+		this.produto = produto;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
