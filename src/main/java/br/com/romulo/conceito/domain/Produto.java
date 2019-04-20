@@ -33,8 +33,7 @@ public class Produto implements Serializable{
 			)
 	private List<Categoria> categorias;
 	
-	@ManyToMany(mappedBy="produtos")
-	private List<Pedido> pedidos;
+	
 
 	public Produto() {
 	}
@@ -100,13 +99,7 @@ public class Produto implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	public List<Pedido> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<Pedido> pedidos) {
-		this.pedidos = pedidos;
-	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

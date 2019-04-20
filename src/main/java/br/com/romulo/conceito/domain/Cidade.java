@@ -1,7 +1,6 @@
 package br.com.romulo.conceito.domain;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,23 +8,38 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-public class Pedido implements Serializable{
+public class Cidade implements Serializable{
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
-	
-	@Temporal(TemporalType.DATE)
-	private Calendar instante;
-	
-	@ManyToOne
-	@JoinColumn(name="id_endereco")
-	private Endereco endereco;
+	 @Id
+	 @GeneratedValue(strategy=GenerationType.IDENTITY)
+	 private Integer id;
+	 
+	 private String nome;
+	 
+	 @ManyToOne
+	 @JoinColumn(name="estado_id")
+	 private Estado estado;
+	 
+	 public Cidade() {
+	}
+	 
+	 
+
+	public Cidade(Integer id, String nome, Estado estado) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.estado = estado;
+	}
+
+
 
 	public Integer getId() {
 		return id;
@@ -35,12 +49,20 @@ public class Pedido implements Serializable{
 		this.id = id;
 	}
 
-	public Calendar getInstante() {
-		return instante;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setInstante(Calendar instante) {
-		this.instante = instante;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	@Override
@@ -59,7 +81,7 @@ public class Pedido implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pedido other = (Pedido) obj;
+		Cidade other = (Cidade) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

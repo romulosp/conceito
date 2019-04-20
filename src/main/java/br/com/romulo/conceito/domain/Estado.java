@@ -1,46 +1,59 @@
 package br.com.romulo.conceito.domain;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Pedido implements Serializable{
+public class Estado implements Serializable{
+
 	private static final long serialVersionUID = 1L;
+
+	public Estado(Integer id, String nome) {
+		super();
+		this.id = id;
+		this.nome = nome;
+	} 
+	
+
+	public Estado() {
+		
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Integer id ;
+	private String nome;
 	
-	@Temporal(TemporalType.DATE)
-	private Calendar instante;
+	@OneToMany(mappedBy="estado")
+	private List<Cidade> cidades;
 	
-	@ManyToOne
-	@JoinColumn(name="id_endereco")
-	private Endereco endereco;
+	
+	
+	public List<Cidade> getCidades() {
+		return cidades;
+	}
+
+	public void setCidades(List<Cidade> cidades) {
+		this.cidades = cidades;
+	}
 
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-	public Calendar getInstante() {
-		return instante;
+	public String getNome() {
+		return nome;
 	}
-
-	public void setInstante(Calendar instante) {
-		this.instante = instante;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	@Override
@@ -50,7 +63,6 @@ public class Pedido implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -59,7 +71,7 @@ public class Pedido implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pedido other = (Pedido) obj;
+		Estado other = (Estado) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -68,3 +80,5 @@ public class Pedido implements Serializable{
 		return true;
 	}
 }
+
+
