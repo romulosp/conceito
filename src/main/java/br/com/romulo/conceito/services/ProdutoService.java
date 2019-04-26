@@ -1,5 +1,6 @@
 package br.com.romulo.conceito.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,12 @@ public class ProdutoService {
 	
 	 public Produto buscarProdutoPorID(Integer idProduto){
 		 Optional<Produto> obj = produtoRepository.findById(idProduto);
-			return obj.orElse(null);
+			return obj.orElseThrow(()-> new ObjetoNaoLocalizado());
 	 }
+	 
+	 public List<Produto> listAll(){
+		 return produtoRepository.findAll();
+	 }
+	 
+	 
 }

@@ -8,7 +8,7 @@ public class ObjetoNaoLocalizado extends RuntimeException {
 	private static final long serialVersionUID = 1L;
 
 	public ObjetoNaoLocalizado() {
-		super();
+		super("PESQUISA SEM NENHUM RESULTADO");
 	}
 	
 	public ObjetoNaoLocalizado(String erro) {

@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Categoria implements Serializable{
 
@@ -24,13 +26,12 @@ public class Categoria implements Serializable{
 		
 	}
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id ;
 	private String nome;
 	
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy="categorias")
 	private List<Produto> produto;
 	
