@@ -16,6 +16,6 @@ public class CategoriaService {
 	
 	public Categoria recuperarPorCategoria(Integer idCategoria) {
 		Optional<Categoria> obj = categoriaDAO.findById(idCategoria);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjetoNaoLocalizado("NENHUM RESULTADO ENTRADO CATEGORIA" ) );
 	}
 }
