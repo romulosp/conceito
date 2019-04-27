@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.romulo.conceito.domain.ItemPedido;
+import br.com.romulo.conceito.domain.ProdutoPedidoPK;
 import br.com.romulo.conceito.services.ItemPedidoService;
 
 @RestController
@@ -18,7 +19,7 @@ public class ItemPedidoResource {
 	private ItemPedidoService itemPedidoService;
 
 	@RequestMapping(value="/{idItemPedido}", method = RequestMethod.GET)
-	public ResponseEntity<ItemPedido> listarPedidoPorID(@PathVariable("idItemPedido") Integer idItemPedido){
+	public ResponseEntity<ItemPedido> listarPedidoPorID(@PathVariable("idItemPedido") ProdutoPedidoPK idItemPedido){
 		return ResponseEntity.ok().body(itemPedidoService.buscarItemPedidoPorID(idItemPedido));
 	}
 	
