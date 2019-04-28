@@ -21,6 +21,18 @@ public class CategoriaService {
 
 	public Categoria inserir(Categoria cat) {
 		cat.setId(null);
+		return salvar(cat);
+	}
+
+	public Categoria update(Categoria cat) {
+		return salvar(cat);
+	}
+	
+	private Categoria salvar(Categoria cat) {
 		return categoriaDAO.save(cat);
+	}
+
+	public void delete(Integer id) {
+		categoriaDAO.deleteById(id);
 	}
 }
