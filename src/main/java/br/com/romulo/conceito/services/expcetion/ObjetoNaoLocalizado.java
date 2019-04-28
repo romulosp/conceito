@@ -1,4 +1,4 @@
-package br.com.romulo.conceito.services;
+package br.com.romulo.conceito.services.expcetion;
 
 public class ObjetoNaoLocalizado extends RuntimeException {
 

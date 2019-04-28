@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.romulo.conceito.domain.ItemPedido;
 import br.com.romulo.conceito.domain.ProdutoPedidoPK;
 import br.com.romulo.conceito.repositories.ItemPedidoRepository;
+import br.com.romulo.conceito.services.expcetion.ObjetoNaoLocalizado;
 
 @Service
 public class ItemPedidoService {

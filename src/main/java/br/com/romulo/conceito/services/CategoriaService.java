@@ -3,10 +3,13 @@ package br.com.romulo.conceito.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.romulo.conceito.domain.Categoria;
 import br.com.romulo.conceito.repositories.CategoriaRepository;
+import br.com.romulo.conceito.services.expcetion.ObjetoNaoLocalizado;
+import br.com.romulo.conceito.services.expcetion.SegurancaIntegridadeException;
 
 @Service
 public class CategoriaService {
@@ -34,7 +37,15 @@ public class CategoriaService {
 	}
 
 	public void delete(Integer id) {
-		recuperarPorCategoria(id);
-		categoriaDAO.deleteById(id);
+		try {
+			recuperarPorCategoria(id);
+			categoriaDAO.deleteById(id);
+		} catch (ObjetoNaoLocalizado objetoNaolocalizado) {
+			throw objetoNaolocalizado;
+		}catch(DataIntegrityViolationException dataIntegrityViolationException) {
+			throw new SegurancaIntegridadeException(" não é possivel exclui uma categoria vinculada a um produto");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

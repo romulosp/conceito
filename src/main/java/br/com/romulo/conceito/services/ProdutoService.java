@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.romulo.conceito.domain.Produto;
 import br.com.romulo.conceito.repositories.ProdutoRepository;
+import br.com.romulo.conceito.services.expcetion.ObjetoNaoLocalizado;
 
 @Service
 public class ProdutoService {

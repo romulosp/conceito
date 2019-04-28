@@ -10,6 +10,7 @@ import br.com.romulo.conceito.domain.PagamentoComBoleto;
 import br.com.romulo.conceito.domain.PagamentoComCartao;
 import br.com.romulo.conceito.repositories.PagamentoComBoletoRepository;
 import br.com.romulo.conceito.repositories.PagamentoComCartaoRepository;
+import br.com.romulo.conceito.services.expcetion.ObjetoNaoLocalizado;
 
 @Service
 public class PagamentoService {
