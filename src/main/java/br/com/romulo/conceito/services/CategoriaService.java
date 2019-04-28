@@ -34,6 +34,7 @@ public class CategoriaService {
 	}
 
 	public void delete(Integer id) {
+		recuperarPorCategoria(id);
 		categoriaDAO.deleteById(id);
 	}
 }
