@@ -177,6 +177,12 @@ public class ConceitoApplication implements CommandLineRunner{
 		
 		
 		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1,itemPedido2,itemPedido3));
+		
+		
+		pedido1.setItemPedido(itemPedido1);
+		pedido2.setItemPedido(itemPedido2);
+		
+		pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
 	}
 }
 

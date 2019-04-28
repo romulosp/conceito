@@ -36,6 +36,10 @@ public class Pedido implements Serializable{
 	@OneToOne(cascade=CascadeType.ALL)
 	private Pagamento pagamento;
 	
+	@OneToOne
+	private ItemPedido itemPedido;
+	
+	
 	public Pedido() {}
 	
 	
@@ -124,4 +128,16 @@ public class Pedido implements Serializable{
 	public void setPagamento(Pagamento pagamento) {
 		this.pagamento = pagamento;
 	}
+
+
+	public ItemPedido getItemPedido() {
+		return itemPedido;
+	}
+
+
+	public void setItemPedido(ItemPedido itemPedido) {
+		this.itemPedido = itemPedido;
+	}
+
+ 
 }
