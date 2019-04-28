@@ -25,6 +25,7 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria cat) {
+		recuperarPorCategoria(cat.getId());
 		return salvar(cat);
 	}
 	

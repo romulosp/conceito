@@ -38,7 +38,7 @@ public class CategoriaResource {
 	@RequestMapping(value="/update" ,method = RequestMethod.PUT)
 	 public ResponseEntity<?> update(@RequestBody Categoria cat){
 			categoriaService.update(cat);
-			return ResponseEntity.ok().build();
+			return ResponseEntity.noContent().build();
 	 }
 	
 	 @RequestMapping(value="/delete/{id}",method = RequestMethod.DELETE)
