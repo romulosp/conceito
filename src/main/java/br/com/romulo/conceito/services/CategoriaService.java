@@ -18,4 +18,9 @@ public class CategoriaService {
 		Optional<Categoria> obj = categoriaDAO.findById(idCategoria);
 		return obj.orElseThrow(() -> new ObjetoNaoLocalizado() );
 	}
+
+	public Categoria inserir(Categoria cat) {
+		cat.setId(null);
+		return categoriaDAO.save(cat);
+	}
 }
