@@ -1,8 +1,10 @@
 package br.com.romulo.conceito.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.romulo.conceito.domain.Produto;
 
@@ -17,6 +19,7 @@ public class ProdutoDTO implements Serializable{
 	private String nome;
 	private Double preco;
 	
+	@JsonIgnore
 	private List<CategoriaDTO> categorias;
 
 	public ProdutoDTO() {
@@ -35,9 +38,8 @@ public class ProdutoDTO implements Serializable{
 			setNome(produto.getNome());
 			setPreco(produto.getPreco());
 			if(produto.getCategorias() != null) {
-				List<CategoriaDTO> listaCategorias = new ArrayList<CategoriaDTO>();
-				produto.getCategorias().stream().map(categoria -> listaCategorias.add(new CategoriaDTO(categoria)));
-				setCategorias(listaCategorias);
+				List<CategoriaDTO> listaCategoriasDTO = produto.getCategorias().stream().map(categoria ->  new CategoriaDTO(categoria)).collect(Collectors.toList());
+				setCategorias(listaCategoriasDTO);
 			}
 		}
 	}

@@ -1,9 +1,9 @@
 package br.com.romulo.conceito.dto;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import br.com.romulo.conceito.domain.Cliente;
 
@@ -23,7 +23,6 @@ public class ClienteDTO implements Serializable{
 	
 	private Set<String> telefones;
 	private List<EnderecoDTO> enderecos;
-	private List<PedidoDTO> pedidos;
 	
 	public ClienteDTO() {
 	}
@@ -48,16 +47,10 @@ public class ClienteDTO implements Serializable{
 			
 			setTelefones(cliente.getTelefones());
 			if(cliente.getEnderecos() != null) {
-				List<EnderecoDTO> listaEnderecoCliente = new ArrayList<EnderecoDTO>();
-				cliente.getEnderecos().stream().map(endereco -> new EnderecoDTO(endereco));
-				setEnderecos(listaEnderecoCliente);
+				List<EnderecoDTO> listaEnderecoClienteDTO = cliente.getEnderecos().stream().map(endereco -> new EnderecoDTO(endereco)).collect(Collectors.toList());
+				setEnderecos(listaEnderecoClienteDTO);
 			}
-			
-			if(cliente.getPedidos() != null) {
-				List<PedidoDTO> listaPedidoCliente = new ArrayList<PedidoDTO>();
-				cliente.getPedidos().stream().map(pedido -> new PedidoDTO(pedido));
-				setPedidos(listaPedidoCliente);
-			}
+			 
 		}
 		
 	}
@@ -117,13 +110,4 @@ public class ClienteDTO implements Serializable{
 	public void setTelefones(Set<String> telefones) {
 		this.telefones = telefones;
 	}
-
-	public List<PedidoDTO> getPedidos() {
-		return pedidos;
-	}
-
-	public void setPedidos(List<PedidoDTO> pedidos) {
-		this.pedidos = pedidos;
-	}
-	
 }
