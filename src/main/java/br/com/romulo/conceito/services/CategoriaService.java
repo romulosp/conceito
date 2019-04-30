@@ -1,5 +1,6 @@
 package br.com.romulo.conceito.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class CategoriaService {
 		return obj.orElseThrow(() -> new ObjetoNaoLocalizado() );
 	}
 
+	
+	public List<Categoria> listAll() {
+		return categoriaDAO.findAll();
+	}
+	
 	public Categoria inserir(Categoria cat) {
 		cat.setId(null);
 		return salvar(cat);
