@@ -6,13 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class PagamentoComBoleto extends Pagamento {
 	private static final long serialVersionUID = 1L;
 	
+	@JsonFormat( pattern = "dd/MM/yyyy HH:MM")
 	@Temporal(TemporalType.DATE)
 	private Calendar dataPagamento;
 	
+	@JsonFormat( pattern = "dd/MM/yyyy HH:MM")
 	@Temporal(TemporalType.DATE)
 	private Calendar dataVencimento;
 
