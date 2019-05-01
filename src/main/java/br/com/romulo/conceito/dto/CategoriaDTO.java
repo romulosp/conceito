@@ -2,6 +2,10 @@ package br.com.romulo.conceito.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
+
 import br.com.romulo.conceito.domain.Categoria;
 
 public class CategoriaDTO implements Serializable{
@@ -27,6 +31,8 @@ public class CategoriaDTO implements Serializable{
 	}
 	
 	private Integer id ;
+	@NotEmpty(message="Favor preencher o nome")
+	@Length(min=5, max=40, message="O nome da categoria tem que ter 5 à 40 caracteres.")
 	private String nome;
 
 	public Integer getId() {
@@ -40,6 +46,10 @@ public class CategoriaDTO implements Serializable{
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Categoria toCategoria() {
+		return  new Categoria(getId(), getNome());
 	}
 	 
 }
