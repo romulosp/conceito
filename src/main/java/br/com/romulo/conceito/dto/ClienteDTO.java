@@ -24,19 +24,19 @@ public class ClienteDTO implements Serializable{
 	private Integer id;
 	
 	@NotEmpty(message="Favor preencher o nome do cliente")
-	@Length(min=25, max=80, message="O nome do cliente tem que ter 25 à 80 caracteres.")
+	@Length(min=10, max=80, message="O nome do cliente tem que ter 25 à 80 caracteres.")
 	private String nome;
 	@NotEmpty(message="Favor preencher o email do cliente")
 	@Length(min=10, max=30, message="O email do cliente tem que ter 10 à 30 caracteres.")
 	private String email;
-	@NotEmpty(message="Favor preencher o cpf ou cpnj do cliente")
+//	@NotEmpty(message="Favor preencher o cpf ou cpnj do cliente")
 	private String cpfOuCnpj;
-	@NotEmpty(message="Favor informar o tipo do cliente")
+//	@NotEmpty(message="Favor informar o tipo do cliente")
 	private Integer tipo;
 	
-	@NotEmpty(message="Favor preencher a comunicação do cliente")
+//	@NotEmpty(message="Favor preencher a comunicação do cliente")
 	private Set<String> telefones;
-	@NotEmpty(message="Favor preencher o endereço do cliente")
+//	@NotEmpty(message="Favor preencher o endereço do cliente")
 	private List<EnderecoDTO> enderecos;
 	
 	public ClienteDTO() {

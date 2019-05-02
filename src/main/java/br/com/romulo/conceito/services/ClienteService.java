@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.romulo.conceito.domain.Cliente;
 import br.com.romulo.conceito.repositories.ClienteRepository;
+import br.com.romulo.conceito.repositories.EnderecoRepository;
 import br.com.romulo.conceito.services.expcetion.ObjetoNaoLocalizado;
 import br.com.romulo.conceito.services.expcetion.SegurancaIntegridadeException;
 
@@ -17,6 +18,9 @@ public class ClienteService {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private EnderecoRepository enderecoRepository;
 	
 	public Cliente recuperarClientePorCliente(Integer idCliente) {
 		Optional<Cliente> obj = clienteRepository.findById(idCliente);
@@ -38,8 +42,16 @@ public class ClienteService {
 		return salvar(cat);
 	}
 	
-	private Cliente salvar(Cliente cat) {
-		return clienteRepository.save(cat);
+	private Cliente salvar(final Cliente cliente) {
+		Cliente clienteRetorno = new Cliente();
+		clienteRetorno = clienteRepository.save(cliente);
+
+		if(cliente.getEnderecos() != null && !cliente.getEnderecos().isEmpty()) {
+			cliente.getEnderecos().stream().forEach(endereco -> endereco.setCliente(cliente));			
+			enderecoRepository.saveAll(cliente.getEnderecos());
+		}
+		
+		return clienteRetorno;
 	}
 
 	public void delete(Integer id) {

@@ -45,6 +45,7 @@ public class ClienteResource {
 			URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().
 					path("/cliente/{id}").buildAndExpand(cliente.getId()).toUri();
 			return ResponseEntity.created(uri).build();
+		
 	}
 	
 	@RequestMapping(value="/update" ,method = RequestMethod.PUT)

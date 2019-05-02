@@ -31,7 +31,6 @@ public class Categoria implements Serializable{
 	private Integer id ;
 	private String nome;
 	
-	private String descricao;
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy="categorias")
@@ -82,14 +81,6 @@ public class Categoria implements Serializable{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
 	}
 }
 

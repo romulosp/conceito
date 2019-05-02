@@ -19,11 +19,7 @@ public class EnderecoDTO implements Serializable{
 	private String bairro;
 	private String cep;
 	
-	 
-	private CidadeDTO cidade;
-	
-	 
-	private ClienteDTO cliente;
+	  
  
 	
 	public EnderecoDTO() {
@@ -42,6 +38,7 @@ public class EnderecoDTO implements Serializable{
 
 	public EnderecoDTO(Endereco endereco) {
 		if(endereco != null) {
+			setId(endereco.getId());
 			setLogradouro(endereco.getLogradouro());
 			setNumero(endereco.getNumero());
 			setComplemento(endereco.getComplemento());
@@ -101,19 +98,4 @@ public class EnderecoDTO implements Serializable{
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-
-	public ClienteDTO getCliente() {
-		return cliente;
-	}
-	public void setCliente(ClienteDTO cliente) {
-		this.cliente = cliente;
-	}
-
-	public CidadeDTO getCidade() {
-		return cidade;
-	}
-	public void setCidade(CidadeDTO cidade) {
-		this.cidade = cidade;
-	}
-	
 }
