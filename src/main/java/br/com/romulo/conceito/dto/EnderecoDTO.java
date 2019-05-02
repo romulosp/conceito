@@ -50,7 +50,20 @@ public class EnderecoDTO implements Serializable{
 		}
 		
 	}
-
+	
+	
+	public Endereco toEndreco() {
+		Endereco retorno = null;
+		if(this != null) {
+			retorno = new Endereco();
+			retorno.setLogradouro(getLogradouro());
+			retorno.setBairro(getBairro());
+			retorno.setNumero(getNumero());
+			retorno.setComplemento(getComplemento());
+			retorno.setCep(getCep());
+		}
+		return retorno;
+	}
 
 	public Integer getId() {
 		return id;
@@ -102,4 +115,5 @@ public class EnderecoDTO implements Serializable{
 	public void setCidade(CidadeDTO cidade) {
 		this.cidade = cidade;
 	}
+	
 }
