@@ -2,7 +2,6 @@ package br.com.romulo.conceito.domain;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -10,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,8 +34,11 @@ public class Cliente implements Serializable{
 	private List<Endereco> enderecos;
 	
 	@ElementCollection
-	@CollectionTable(name="TELEFONES")
-	private Set<String> telefones;
+	@CollectionTable(
+	        name="COMUNICACOES",
+	        joinColumns=@JoinColumn(name="ID_CLIENTE")
+	  )
+	private List<Comunicacao> comunicacoes;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="cliente")
@@ -93,13 +96,7 @@ public class Cliente implements Serializable{
 		this.enderecos = enderecos;
 	}
 
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
-	}
+ 
 	
 	public List<Pedido> getPedidos() {
 		return pedidos;
@@ -108,7 +105,14 @@ public class Cliente implements Serializable{
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
 	}
-	
+	 
+	public List<Comunicacao> getComunicacoes() {
+		return comunicacoes;
+	}
+
+	public void setComunicacoes(List<Comunicacao> comunicacoes) {
+		this.comunicacoes = comunicacoes;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -134,4 +138,5 @@ public class Cliente implements Serializable{
 			return false;
 		return true;
 	}
+
 }

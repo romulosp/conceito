@@ -2,7 +2,6 @@ package br.com.romulo.conceito.dto;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotEmpty;
@@ -35,7 +34,7 @@ public class ClienteDTO implements Serializable{
 	private Integer tipo;
 	
 //	@NotEmpty(message="Favor preencher a comunicação do cliente")
-	private Set<String> telefones;
+	private List<ComunicacaoDTO> comunicacoes;
 //	@NotEmpty(message="Favor preencher o endereço do cliente")
 	private List<EnderecoDTO> enderecos;
 	
@@ -56,11 +55,18 @@ public class ClienteDTO implements Serializable{
 			setNome(cliente.getNome());
 			setEmail(cliente.getEmail());
 			setCpfOuCnpj(cliente.getCpfOuCnpj());
+			
+			if(cliente.getComunicacoes() != null){
+				List<ComunicacaoDTO> listaComunicacoesCliente = cliente.getComunicacoes().stream().map(comunicacao -> new ComunicacaoDTO(comunicacao))
+				.collect(Collectors.toList());
+				setComunicacoes(listaComunicacoesCliente);
+			}
+			
 			if(cliente.getTipo() != null) {
 				setTipo(cliente.getTipo().getCodigo());
 			}
 			
-			setTelefones(cliente.getTelefones());
+		 
 			if(cliente.getEnderecos() != null) {
 				List<EnderecoDTO> listaEnderecoClienteDTO = cliente.getEnderecos().stream().map(endereco -> new EnderecoDTO(endereco)).collect(Collectors.toList());
 				setEnderecos(listaEnderecoClienteDTO);
@@ -118,13 +124,7 @@ public class ClienteDTO implements Serializable{
 		this.enderecos = enderecos;
 	}
 
-	public Set<String> getTelefones() {
-		return telefones;
-	}
-
-	public void setTelefones(Set<String> telefones) {
-		this.telefones = telefones;
-	}
+	 
 
 	public Cliente toCliente() {
 		Cliente retorno = new Cliente();
@@ -134,7 +134,7 @@ public class ClienteDTO implements Serializable{
 			retorno.setEmail(getEmail());
 			retorno.setCpfOuCnpj(getCpfOuCnpj());
 			retorno.setTipo(TipoCliente.getTipoCliente(getTipo()));
-			retorno.setTelefones(getTelefones());
+			 
 			List<Endereco> enderecosCliente= null;
 			if(getEnderecos() != null) {
 				enderecosCliente = getEnderecos()
@@ -145,4 +145,14 @@ public class ClienteDTO implements Serializable{
 		}
 		return retorno;
 	}
+
+	public List<ComunicacaoDTO> getComunicacoes() {
+		return comunicacoes;
+	}
+
+	public void setComunicacoes(List<ComunicacaoDTO> comunicacoes) {
+		this.comunicacoes = comunicacoes;
+	}
+
+	 
 }

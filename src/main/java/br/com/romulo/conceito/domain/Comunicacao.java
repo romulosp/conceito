@@ -2,6 +2,11 @@ package br.com.romulo.conceito.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Embeddable;
+
+import br.com.romulo.conceito.dto.ComunicacaoDTO;
+
+@Embeddable
 public class Comunicacao implements Serializable{
 
 	/**
@@ -11,6 +16,21 @@ public class Comunicacao implements Serializable{
 
 	private Integer tipo;
 	private String descricao;
+	
+	public Comunicacao() {}
+	public Comunicacao(TipoComunicacao tipoComunicacao) {
+		setTipo(tipoComunicacao);
+	}
+	
+	
+	
+	public Comunicacao(ComunicacaoDTO comunicacaoDTO) {
+		
+		if(comunicacaoDTO != null) {
+			setTipo(TipoComunicacao.getTipoComunicacao(comunicacaoDTO.getTipo()));
+			setDescricao(comunicacaoDTO.getDescricao());
+		}
+	}
 	
 	public TipoComunicacao getTipo() {
 		return TipoComunicacao.getTipoComunicacao(tipo);
@@ -57,5 +77,10 @@ public class Comunicacao implements Serializable{
 		} else if (!tipo.equals(other.tipo))
 			return false;
 		return true;
+	}
+ 
+	@Override
+	public String toString() {
+		return getTipo().getDescricao()+ " : "+ getDescricao();
 	}
 }

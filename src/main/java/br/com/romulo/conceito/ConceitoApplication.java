@@ -3,9 +3,7 @@ package br.com.romulo.conceito;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import br.com.romulo.conceito.domain.Categoria;
 import br.com.romulo.conceito.domain.Cidade;
 import br.com.romulo.conceito.domain.Cliente;
+import br.com.romulo.conceito.domain.Comunicacao;
 import br.com.romulo.conceito.domain.Endereco;
 import br.com.romulo.conceito.domain.Estado;
 import br.com.romulo.conceito.domain.EstadoPagamento;
@@ -25,6 +24,7 @@ import br.com.romulo.conceito.domain.Pedido;
 import br.com.romulo.conceito.domain.Produto;
 import br.com.romulo.conceito.domain.ProdutoPedidoPK;
 import br.com.romulo.conceito.domain.TipoCliente;
+import br.com.romulo.conceito.domain.TipoComunicacao;
 import br.com.romulo.conceito.repositories.CategoriaRepository;
 import br.com.romulo.conceito.repositories.CidadeRepository;
 import br.com.romulo.conceito.repositories.ClienteRepository;
@@ -137,10 +137,14 @@ public class ConceitoApplication implements CommandLineRunner{
 		endereco2.setCidade(cidade2);
 		cliente1.setEnderecos(Arrays.asList(endereco1,endereco2));
 		
-		Set<String> telefones = new HashSet<>();
-		telefones.add("27363323");
-		telefones.add("93838393");
-		cliente1.setTelefones(telefones);
+		 
+		Comunicacao emailCliente1 = new Comunicacao(TipoComunicacao.EMAIL);
+		emailCliente1.setDescricao("romulos.p@hotmail.com");
+		
+		Comunicacao telefone = new Comunicacao(TipoComunicacao.CELULAR);
+		telefone.setDescricao("61983753771");
+		
+		cliente1.setComunicacoes(Arrays.asList(emailCliente1, telefone));
 		
 		clienteRepository.saveAll(Arrays.asList(cliente1 ));
 		
